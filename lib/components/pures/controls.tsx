@@ -1,13 +1,5 @@
 import React, { useMemo } from 'react'
-import {
-  Button,
-  useTheme,
-  Select,
-  Spacer,
-  Themes,
-  useAllThemes,
-  Keyboard,
-} from 'components'
+import { Button, useTheme, Select, Spacer, Themes, useAllThemes } from 'components'
 import { useConfigs } from 'lib/config-context'
 import useLocale from 'lib/use-locale'
 // import { useRouter } from 'next/router'
@@ -51,7 +43,7 @@ const Controls: React.FC<unknown> = React.memo(() => {
 
   return (
     <div className="wrapper">
-      <Keyboard
+      {/* <Keyboard
         h="28px"
         command
         font="12px"
@@ -59,7 +51,7 @@ const Controls: React.FC<unknown> = React.memo(() => {
         title="Command + K to search.">
         K
       </Keyboard>
-      <Spacer w={0.75} />
+      <Spacer w={0.75} /> */}
       <Button
         w="28px"
         h="28px"

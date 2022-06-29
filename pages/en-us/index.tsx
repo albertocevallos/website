@@ -14,6 +14,7 @@ const Application: NextPage<{}> = () => {
               src="https://pbs.twimg.com/profile_images/1529951834315554816/TvQVejZ5_400x400.jpg"
               width={10}
               height={10}
+              className="profileImage"
             />
             <div>
               <p>
@@ -22,8 +23,8 @@ const Application: NextPage<{}> = () => {
                   Green Oak
                 </Link>
                 , a Web3 investment firm where I build and back early-stage teams. My
-                focus is on market microstructure and how the design of Web3 protocols
-                affect the capital markets they drive.{' '}
+                focus is on market microstructure, how the design of protocols and tokens
+                affect the capital markets they drive. <br />
                 <Link href="http://twitter.com/albertocevalls" target="_blank" color>
                   You can find me on Twitter.
                 </Link>
@@ -62,6 +63,7 @@ const Application: NextPage<{}> = () => {
       </div>
       <style jsx>{`
         .box {
+          margin-top: 24em;
         }
         .layout {
           min-height: calc(100vh - var(--geist-page-nav-height));
@@ -97,6 +99,7 @@ const Application: NextPage<{}> = () => {
           .box {
             display: flex;
             align-items: center;
+            margin-top: 0;
           }
         }
         p {
