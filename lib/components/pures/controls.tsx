@@ -25,14 +25,14 @@ import {
 const Controls: React.FC<unknown> = React.memo(() => {
   const theme = useTheme()
   const { themes } = useAllThemes()
-  const { switchTheme, updateChineseState } = useConfigs()
-  const { pathname } = useRouter()
+  const { switchTheme } = useConfigs()
+  // const { pathname } = useRouter()
   const { locale } = useLocale()
   const isChinese = useMemo(() => locale === CHINESE_LANGUAGE_IDENT, [locale])
-  const nextLocalePath = useMemo(() => {
-    const nextLocale = isChinese ? ENGLISH_LANGUAGE_IDENT : CHINESE_LANGUAGE_IDENT
-    return pathname.replace(locale, nextLocale)
-  }, [locale, pathname])
+  // const nextLocalePath = useMemo(() => {
+  //   const nextLocale = isChinese ? ENGLISH_LANGUAGE_IDENT : CHINESE_LANGUAGE_IDENT
+  //   return pathname.replace(locale, nextLocale)
+  // }, [locale, pathname])
   const hasCustomTheme = useMemo(() => Themes.hasUserCustomTheme(themes), [themes])
 
   const switchThemes = (type: string) => {
@@ -40,10 +40,10 @@ const Controls: React.FC<unknown> = React.memo(() => {
     if (typeof window === 'undefined' || !window.localStorage) return
     window.localStorage.setItem('theme', type)
   }
-  const switchLanguages = () => {
-    updateChineseState(!isChinese)
-    Router.push(nextLocalePath)
-  }
+  // const switchLanguages = () => {
+  //   updateChineseState(!isChinese)
+  //   Router.push(nextLocalePath)
+  // }
   const redirectGithub = () => {
     if (typeof window === 'undefined') return
     window.open(GITHUB_URL)
