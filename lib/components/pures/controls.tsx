@@ -6,7 +6,6 @@ import {
   Spacer,
   Themes,
   useAllThemes,
-  Text,
   Keyboard,
 } from 'components'
 import { useConfigs } from 'lib/config-context'
