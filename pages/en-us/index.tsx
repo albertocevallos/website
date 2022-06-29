@@ -1,14 +1,9 @@
 import React from 'react'
 import { NextPage } from 'next'
-import { useTheme, Grid, Avatar, Image, Link } from 'components'
-import PackageIcon from '@geist-ui/icons/package'
-import FeatherIcon from '@geist-ui/icons/feather'
-import GitHubIcon from '@geist-ui/icons/github'
-import { HomeCell } from 'lib/components'
+import { useTheme, Image, Link } from 'components'
 
 const Application: NextPage<{}> = () => {
   const theme = useTheme()
-  const { palette } = useTheme()
 
   return (
     <>
