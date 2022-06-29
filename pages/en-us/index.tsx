@@ -30,9 +30,9 @@ const Application: NextPage<{}> = () => {
                 </Link>
               </p>
               <p>
-                My interests include physics, history, philosophy and botany. I'm
-                particularly interested in how economics can be combined with technology
-                to tackle the world's toughest problems.{' '}
+                Outside of crypto, my interests include history, philosophy, physics and
+                botany. I believe in combining technology and economics to tackle the
+                world's toughest problems.{' '}
               </p>
               <p>
                 <Link href="/en-us/writing" color>
@@ -52,9 +52,9 @@ const Application: NextPage<{}> = () => {
                 and studied Mathematics at the University of British Columbia in Canada.
               </p>
               <p>
-                I enjoy building useful stuff and contributing to OSS -{' '}
+                I enjoy contributing to OSS and building useful apps -{' '}
                 <Link href="/en-us/r&d" color>
-                  you can check it out here.
+                  you can check them out here.
                 </Link>{' '}
               </p>
             </div>
