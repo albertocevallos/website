@@ -10,7 +10,7 @@ import {
 } from 'components'
 import { useConfigs } from 'lib/config-context'
 import useLocale from 'lib/use-locale'
-import Router, { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import MoonIcon from '@geist-ui/icons/moon'
 import SunIcon from '@geist-ui/icons/sun'
 import UserIcon from '@geist-ui/icons/user'
@@ -18,7 +18,7 @@ import GitHubIcon from '@geist-ui/icons/github'
 import {
   CHINESE_LANGUAGE_IDENT,
   CUSTOM_THEME_TYPE,
-  ENGLISH_LANGUAGE_IDENT,
+  // ENGLISH_LANGUAGE_IDENT,
   GITHUB_URL,
 } from 'lib/constants'
 
