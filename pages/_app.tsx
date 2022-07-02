@@ -30,34 +30,28 @@ const Application: NextPage<AppProps<{}>> = ({ Component, pageProps }) => {
       <Head>
         <title>Alberto Cevallos</title>
         <meta name="google" content="notranslate" />
-        <meta name="twitter:creator" content="@echo_witt" />
+        <meta name="twitter:creator" content="@albertocevalls" />
         <meta name="referrer" content="strict-origin" />
-        <meta property="og:title" content="Geist UI" />
-        <meta property="og:site_name" content="Geist UI" />
-        <meta property="og:url" content="https://geist-ui.dev" />
-        <link rel="dns-prefetch" href="//geist-ui.dev" />
+        <meta property="og:title" content="Alberto Cevallos" />
+        <meta property="og:site_name" content="Alberto Cevallos" />
+        <meta property="og:url" content="https://albertocevallos.com" />
+        <link rel="dns-prefetch" href="//albertocevallos.com" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="generator" content="Geist UI" />
-        <meta
-          name="description"
-          content="An open-source design system for building modern websites and applications."
-        />
-        <meta
-          property="og:description"
-          content="An open-source design system for building modern websites and applications."
-        />
+        <meta name="generator" content="Alberto Cevallos" />
+        <meta name="description" content="Alberto Cevallos" />
+        <meta property="og:description" content="Alberto Cevallos" />
         <meta
           itemProp="image"
           property="og:image"
-          content="https://user-images.githubusercontent.com/11304944/91128466-dfc96c00-e6da-11ea-8b03-a96e6b98667d.png"
+          content="https://pbs.twimg.com/profile_images/1529951834315554816/TvQVejZ5_400x400.jpg"
         />
         <meta
           property="og:image"
-          content="https://user-images.githubusercontent.com/11304944/91128466-dfc96c00-e6da-11ea-8b03-a96e6b98667d.png"
+          content="https://pbs.twimg.com/profile_images/1529951834315554816/TvQVejZ5_400x400.jpg"
         />
         <meta
           property="twitter:image"
-          content="https://user-images.githubusercontent.com/11304944/91128466-dfc96c00-e6da-11ea-8b03-a96e6b98667d.png"
+          content="https://pbs.twimg.com/profile_images/1529951834315554816/TvQVejZ5_400x400.jpg"
         />
         <meta
           name="viewport"
