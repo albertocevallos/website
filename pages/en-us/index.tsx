@@ -49,7 +49,8 @@ const Application: NextPage<{}> = () => {
                 <Link href="#" target="_blank" color>
                   crypto travel booking platform{' '}
                 </Link>{' '}
-                and studied Mathematics at the University of British Columbia in Canada.
+                and studied Mathematics and Economics at the University of British
+                Columbia in Canada.
               </p>
               <p>
                 I enjoy contributing to OSS and building useful apps -{' '}

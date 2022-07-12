@@ -1,0 +1,187 @@
+import Layout from 'lib/components/layout'
+import { Image, Display, Code, Note } from 'components'
+
+export const meta = {
+  title: 'Intro to Cryptoeconomic Modelling',
+  group: '2019',
+  index: 5,
+}
+
+## A (Short) Intro to Cryptoeconomic Modelling
+
+<Image
+  width="600px"
+  height="460px"
+  src="https://miro.medium.com/max/1400/1*241yt5qGzbVEKRZ-W1uMPA.jpeg"
+/>
+<Note label="" type="success">
+  <b>Design and test protocol mechanisms with Python</b>
+</Note>
+
+### Overview
+
+If you’ve been following the blockchain space after the 2017 crypto hype, you’ve likely come across discussions around scalability, interoperability and governance.
+
+Today, JPMorgan announced the creation of their new stablecoin “JPM Coin” to power their novel corporate payment network. Whether you’re a startup using public chain technology or an enterprise using permission-based ledgers, today marks the start of a race to tokenize the world.
+
+The future of economics will be interoperable, meaning assets, agents and transaction logics, may all exist in different ledgers/platforms. So, although the race has started, there are important protocol-level challenges to solve around scalability and robustness for ledger and inter-ledger systems.
+
+### TL;DR
+
+This article is the first instalment of a two-part series where we explore the design of economic and cryptographic mechanisms.
+
+- Part One: We will build a simple blockchain using Python3 (this article).
+- Part Two: We’ll identify the desired outcomes of our network, and design/test mechanisms using our blockchain from Part One.
+
+Designing protocol-level technology isn’t easy, but many of these mechanisms can be applied to create “partially decentralized” organizations (the lesser of two evils).
+
+Decentralization won’t happen over night. Whether you’re an analyst, programmer or “in-closet’” economist, this series is meant to strengthen your understanding of protocols and provide you with a framework for designing and testing practical cryptoeconomic mechanisms.
+
+### Part One: Build a Simple Blockchain Using Python
+
+In this first article we will build a simple blockchain using Python3. I recommend cloning the Jupyter notebook version of the script or using the colab link (you won’t need to install dependencies there). This blockchain simulation will serve as the foundation for testing future cryptographic and economic mechanisms discussed in Part Two of this series.
+
+- Google colab link (recommended): https://colab.research.google.com/drive/1U3Zp3SckhwussLox6Ko4lJCnUzl0lpE3
+- Jupyter notebook: https://github.com/albertocevallos/Intro_To_Cryptoeconomic_Modelling/blob/master/blockchain.ipynb
+- Github repo: https://github.com/albertocevallos/Intro_To_Cryptoeconomic_Modelling
+
+Let’s get started!
+
+### Step 1: Import Dependencies
+
+You’ll need to import the following dependencies:
+
+```python
+import datetime
+import hashlib
+```
+
+‘datetime’ will be used to generate timestamps, ‘hashlib’ contains hashing algorithms used in the creation of blocks. You can install the dependencies using pip.
+
+### Step 2: Create a Block
+
+Now, we will define the ‘Block’ data structure. In this simulation, each block has 7 attributes.
+
+- blockNo: Number of of the block.
+- data: Any data stored in the block (eg, transactions, certificates, pictures).
+- next: Pointer to the next block.
+- hash: Unique ID and integrity verification mechanism, contains a signature of a block’s attributes (immutability mechanism).
+- nonce: Number only used once.
+- previous_hash: Stores the hash (ID) of the previous block in the chain.
+- timestamp: Contains timestamp of when the block was generated.
+
+```python
+    nonce = 0
+    previous_hash = 0x0
+    timestamp = datetime.datetime.now()
+
+    def __init__(self, data):
+        self.data = data
+
+    def hash(self):
+        h = hashlib.sha256()
+        h.update(
+        str(self.nonce).encode('utf-8') +
+        str(self.data).encode('utf-8') +
+        str(self.previous_hash).encode('utf-8') +
+        str(self.timestamp).encode('utf-8') +
+        str(self.blockNo).encode('utf-8')
+        )
+        return h.hexdigest()
+
+    def __str__(self):
+        return "Block Hash: " + str(self.hash()) + "\nBlockNo: " + str(self.blockNo) + "\nBlock Data: " + str(self.data) + "\nHashes: " + str(self.nonce) + "\n--------------"
+```
+
+The ‘init’ function will generate a block once data stored in it. The ‘hash’ function contains the logic to compute the ‘hash’ attribute.
+
+<Image
+  width="600px"
+  height="300px"
+  src="https://miro.medium.com/max/1280/1*ONl_UixLI9I1RJxMIMRd3g.png"
+/>
+
+<Note label="" type="success">
+  <b>
+    Each ‘hash’ serves as the next block’s ‘previous_hash’ attribute, forming a chain.
+  </b>
+</Note>
+
+Hashing functions are deterministic, meaning that if you change a transaction within a given block, it will change the hash of that given block, and alter all the blocks produced after it.
+
+We’ll use SHA-256 to generate an almost-unique 256-bit signature representing a piece of text. The input to the hashing function will be a concatenated string consisting of 5 block attributes (nonce, data, previous_hash, timestamp and block number).
+
+### Step 3: Create a Blockchain
+
+Let’s define the ‘Blockchain’ data structure itself. It’ll consist of blocks linked together via hash pointers.
+
+We will use a basic Proof-of-Work mechanism for sybil control. Take in mind, blockchains couple PoW or PoS mechanisms with a consensus protocol such as heaviest/“longest” chain selection (Nakamoto Consensus) or pBFT, Tendermint to achieve consensus.
+
+In our simulation, we only have one node (miner), who will need to compute different nonce values until the hash of the block is less than or equal to the current target (difficulty) of the network.
+
+The difficulty or ‘diff’ dictates how computationally rigorous it is to mine a block. The ‘maxNonce’ is the maximum number we can store in a 32-bit number and the ‘target’ is the target hash value to mine a block (requirement to add to chain).
+
+We then create our “Genesis Block” and set it as the head of our blockchain.
+
+Let’s define our ‘add’ function. We’ll only need the block to be added as our only parameter. We use the hash (ID) of the most recent block in the chain to update the ‘previous_hash’ attribute. We’ll also update the ‘blockNo’ attribute by adding one to the previous block’s number (as this is the next block in the chain).
+
+We’ll set the (new) block equal to itself, making it the head of the chain.
+
+```python
+class Blockchain:
+
+    diff = 20
+    maxNonce = 2**32
+    target = 2 ** (256-diff)
+
+    block = Block("Genesis")
+    head = block
+
+    def add(self, block):
+
+        block.previous_hash
+        block.blockNo = self.block.blockNo + 1
+
+        self.block.next = block
+        self.block = self.block.next
+
+    def mine(self, block):
+        for n in range(self.maxNonce):
+            if int(block.hash(), 16) <= self.target:
+                self.add(block)
+                print(block)
+                break
+            else:
+                block.nonce += 1
+```
+
+To mine the head of the chain, the block will need to have a hash that is equal or less than the ‘target’ value. We’ll run a loop until this statement is true.
+
+#### Step 4: Print the Blockchain
+
+Finally, let’s initialize the blockchain and run the mining function for 10 times. Printing out the content of 10 blocks.
+
+```python
+blockchain = Blockchain()
+
+for n in range(10):
+    blockchain.mine(Block("Block " + str(n+1)))
+
+while blockchain.head != None:
+    print(blockchain.head)
+    blockchain.head = blockchain.head.next
+```
+
+### Conclusions
+
+We can use Python to model the basic cryptoeconomic mechanisms and data structures used in a blockchain architecture. Next, we will analyze:
+
+- Attack vectors (eg. sybil attacks)
+- Governance (eg. decision making, consensus)
+- Product Requirements (eg. level of security, speed)
+
+Understanding the desired outcomes of your network is crucial to designing economic incentives (eg. block rewards, penalties) and cryptographic protocols (eg. P2P encrypted messaging). Many of these mechanisms can be baked into the code of emerging startups and established enterprises, assuring higher levels of privacy, security and trust.
+
+In the future, all companies will be involved in technology some way or another. Entrepreneurs, analysts and programmers can leverage this thinking to build partially decentralized organizations and connect them to larger infrastructure such as Ethereum or Polkadot.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

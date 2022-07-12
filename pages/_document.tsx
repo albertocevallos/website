@@ -39,10 +39,6 @@ class MyDocument extends Document {
           <NextScript />
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-110371817-12"
-          />
-          <script
-            async
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];

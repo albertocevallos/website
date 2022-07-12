@@ -117,7 +117,6 @@ const deepTranslate = (metadata, locales) => {
         const data = await getMetadata(childDirs, dir)
         const sorted = data.sort((a, b) => weights[a.name] - weights[b.name])
         const translatedData = deepTranslate(sorted, currentLocale)
-
         return {
           name,
           content: translatedData,
@@ -129,8 +128,11 @@ const deepTranslate = (metadata, locales) => {
       sortdMetaData.map(async data => {
         const targetPath = getTargetPath(data.name)
         await fs.ensureFile(targetPath)
-        await fs.writeJson(targetPath, data.content.reverse())
-        console.log(data.content)
+        let cand = data
+        let prompt = data.content.reverse()[0].children.reverse()
+        cand.content[0].children = prompt
+
+        await fs.writeJson(targetPath, cand.content)
       }),
     )
   } catch (e) {
