@@ -10,7 +10,7 @@
     "docs:start": "next start",
     "docs:collect": "node scripts/collect-meta.js",
     "docs:seeds": "node scripts/seeds/update.js",
-    "docs:build": "yarn docs:collect & yarn docs:seeds && next build",
+    "docs:build": "yarn docs:collect && next build",
     "prettier": "prettier --write .",
     "lint": "eslint \"{components,lib}/**/*.{js,ts,tsx}\"",
     "test": "jest --config .jest.config.js --no-cache",
