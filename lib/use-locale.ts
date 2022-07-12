@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import useCurrentState from 'components/utils/use-current-state'
 
-const DEFAULT_LOCALE = 'en-us'
+const DEFAULT_LOCALE = ''
 const DEFAULT_TAB = ''
 
 export type LocaleTypes = {

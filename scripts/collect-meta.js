@@ -38,7 +38,7 @@ const groupWeights = {
   工具包: 10,
 }
 
-const getMetadata = async (files, parentPath) => {
+const getMetadata = async (files, parentPath, name) => {
   return Promise.all(
     files
       .filter(name => name.endsWith('.mdx') || !name.includes('.'))
@@ -114,7 +114,7 @@ const deepTranslate = (metadata, locales) => {
         const currentLocale = metaLocales[name] || {}
         const dir = path.join(pagePrefix, name)
         const childDirs = await fs.readdir(dir)
-        const data = await getMetadata(childDirs, dir)
+        const data = await getMetadata(childDirs, dir, name)
         const sorted = data.sort((a, b) => weights[a.name] - weights[b.name])
         const translatedData = deepTranslate(sorted, currentLocale)
         return {
@@ -123,11 +123,36 @@ const deepTranslate = (metadata, locales) => {
         }
       }),
     )
-    console.log(sortdMetaData)
+
+    const transform = sortdMetaData.map(child => {
+      const childrenHasGroup = child.content.find(item => item.group)
+      if (childrenHasGroup) {
+        const groups = [...new Set(child.content.map(item => item.group || 'others'))]
+        const groupChildren = groups
+          .map(groupName => ({
+            name: groupName,
+            children: child.content.filter(
+              item => (item.group || 'others') === groupName,
+            ),
+          }))
+          .sort((a, b) => {
+            const pre = a.name.toLowerCase()
+            const current = b.name.toLowerCase()
+            return groupWeights[pre] - groupWeights[current]
+          })
+        return {
+          name: child.name,
+          children: groupChildren.reverse(),
+        }
+      }
+    })
+
+    // console.log(transform.map(item => console.log(item.children)))
+    console.log(transform)
 
     const targetPath = getTargetPath('global')
     await fs.ensureFile(targetPath)
-    await fs.writeJson(targetPath, sortdMetaData.reverse())
+    await fs.writeJson(targetPath, transform.reverse())
   } catch (e) {
     console.log(e)
     process.exit(1)

@@ -7,6 +7,8 @@ export type Sides = {
   url?: string
   localeName?: string
   children?: Sides | Array<Sides>
+  content?: any
+  group?: any
 }
 
 export interface SideItemProps {

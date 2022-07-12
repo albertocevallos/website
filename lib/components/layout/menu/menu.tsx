@@ -19,13 +19,10 @@ const Menu: React.FC<unknown> = () => {
   const [, setBodyHidden] = useBodyScroll(null, { delayReset: 300 })
   const isMobile = useMediaQuery('xs', { match: 'down' })
   const allSides = useMemo(() => Metadata['g-all'], [locale])
-  console.log(allSides)
 
   useEffect(() => {
     const prefetch = async () => {
-      const urls = isChinese
-        ? ['/zh-cn/guide/introduction', '/zh-cn/components/text', '/zh-cn/customization']
-        : ['/en-us/guide/introduction', '/en-us/components/text', '/en-us/customization']
+      const urls = ['/writing/intro-to-cryptoeconomic-modelling', '/r&d/introduction']
       await Promise.all(
         urls.map(async url => {
           await router.prefetch(url)
@@ -94,23 +91,13 @@ const Menu: React.FC<unknown> = () => {
           <div className="content">
             <div className="logo">
               <NextLink href={`/`}>
-                <a aria-label="Go Home">
-                  {/* <Image
-                    src="/images/logo.png"
-                    width="20px"
-                    height="20px"
-                    mr={0.5}
-                    draggable={false}
-                    title="Logo"
-                  /> */}
-                  Alberto Cevallos
-                </a>
+                <a aria-label="Go Home">Alberto Cevallos</a>
               </NextLink>
             </div>
 
             <div className="tabs">
               <Tabs
-                value={currentUrlTabValue}
+                value={locale}
                 leftSpace={0}
                 activeClassName="current"
                 align="center"
@@ -118,15 +105,16 @@ const Menu: React.FC<unknown> = () => {
                 hideBorder
                 onChange={handleTabChange}>
                 <Tabs.Item font="14px" label={isChinese ? '主页' : 'Home'} value="" />
-                {allSides.map((tab, index) => (
-                  <Tabs.Item
-                    font="14px"
-                    label={tab.name}
-                    value={tab.name}
-                    key={`${tab.name}-${index}`}
-                    onClick={() => console.log()}
-                  />
-                ))}
+                {allSides.map((tab, index) => {
+                  return (
+                    <Tabs.Item
+                      font="14px"
+                      label={tab.name}
+                      value={tab.name}
+                      key={`${tab.name}-${index}`}
+                    />
+                  )
+                })}
               </Tabs>
             </div>
 
