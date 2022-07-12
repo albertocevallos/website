@@ -37,6 +37,7 @@ class MyDocument extends Document {
           />
           <Main />
           <NextScript />
+
           <script
             async
             dangerouslySetInnerHTML={{
