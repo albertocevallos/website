@@ -123,18 +123,11 @@ const deepTranslate = (metadata, locales) => {
         }
       }),
     )
+    console.log(sortdMetaData)
 
-    await Promise.all(
-      sortdMetaData.map(async data => {
-        const targetPath = getTargetPath(data.name)
-        await fs.ensureFile(targetPath)
-        let cand = data
-        let prompt = data.content.reverse()[0].children.reverse()
-        cand.content[0].children = prompt
-
-        await fs.writeJson(targetPath, cand.content)
-      }),
-    )
+    const targetPath = getTargetPath('global')
+    await fs.ensureFile(targetPath)
+    await fs.writeJson(targetPath, sortdMetaData.reverse())
   } catch (e) {
     console.log(e)
     process.exit(1)

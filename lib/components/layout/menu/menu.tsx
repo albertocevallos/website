@@ -18,7 +18,8 @@ const Menu: React.FC<unknown> = () => {
   const [expanded, setExpanded] = useState<boolean>(false)
   const [, setBodyHidden] = useBodyScroll(null, { delayReset: 300 })
   const isMobile = useMediaQuery('xs', { match: 'down' })
-  const allSides = useMemo(() => Metadata[locale], [locale])
+  const allSides = useMemo(() => Metadata['g-all'], [locale])
+  console.log(allSides)
 
   useEffect(() => {
     const prefetch = async () => {
@@ -59,7 +60,7 @@ const Menu: React.FC<unknown> = () => {
     (tab: string) => {
       const shouldRedirectDefaultPage = currentUrlTabValue !== tab
       if (!shouldRedirectDefaultPage) return
-      const defaultPath = `/${locale}/${tab}`
+      const defaultPath = `/${tab}`
       router.push(defaultPath)
     },
     [currentUrlTabValue, locale],
@@ -92,7 +93,7 @@ const Menu: React.FC<unknown> = () => {
         <nav className="menu">
           <div className="content">
             <div className="logo">
-              <NextLink href={`/${locale}`}>
+              <NextLink href={`/`}>
                 <a aria-label="Go Home">
                   {/* <Image
                     src="/images/logo.png"
@@ -120,9 +121,10 @@ const Menu: React.FC<unknown> = () => {
                 {allSides.map((tab, index) => (
                   <Tabs.Item
                     font="14px"
-                    label={tab.localeName || tab.name}
+                    label={tab.name}
                     value={tab.name}
-                    key={`${tab.localeName || tab.name}-${index}`}
+                    key={`${tab.name}-${index}`}
+                    onClick={() => console.log()}
                   />
                 ))}
               </Tabs>
