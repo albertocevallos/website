@@ -8,6 +8,9 @@ import ConfigContext from 'lib/config-provider'
 import useDomClean from 'lib/use-dom-clean'
 import { HybridCode, HybridLink, Search } from 'lib/components'
 import Menu from 'lib/components/layout/menu'
+import * as gtag from 'lib/gtag'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
 
 const Application: NextPage<AppProps<{}>> = ({ Component, pageProps }) => {
   const theme = useTheme()
@@ -17,6 +20,7 @@ const Application: NextPage<AppProps<{}>> = ({ Component, pageProps }) => {
     setCustomTheme(theme)
     setThemeType(theme.type)
   }
+  const router = useRouter()
 
   useEffect(() => {
     const theme = window.localStorage.getItem('theme')
@@ -24,6 +28,18 @@ const Application: NextPage<AppProps<{}>> = ({ Component, pageProps }) => {
     setThemeType('dark')
   }, [])
   useDomClean()
+
+  useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on('hashChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('hashChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <>
@@ -71,6 +87,25 @@ const Application: NextPage<AppProps<{}>> = ({ Component, pageProps }) => {
               img: Image,
               pre: HybridCode,
             }}>
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+              }}
+            />
             <Component {...pageProps} />
           </MDXProvider>
         </ConfigContext>
