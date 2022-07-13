@@ -1,3 +1,3 @@
 import redirect from 'lib/redirect'
 
-export default redirect('/r&d/introduction')
+export default redirect('/r&d/eth-utils')
