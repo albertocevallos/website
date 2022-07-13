@@ -22,9 +22,9 @@ const Application: NextPage<{}> = () => {
                 <Link href="#" target="_blank" color>
                   Green Oak
                 </Link>
-                , a Web3 investment firm where I build and back early-stage teams. My
-                focus is on market microstructure, how the design of protocols and tokens
-                affect the capital markets they drive. <br />
+                , an engineering & investment for Web3. My focus is on market
+                microstructure, how the design of protocols and tokens affect the capital
+                markets they drive. <br />
                 <Link href="http://twitter.com/albertocevalls" target="_blank" color>
                   You can find me on Twitter.
                 </Link>
@@ -35,18 +35,18 @@ const Application: NextPage<{}> = () => {
                 world's toughest problems.{' '}
               </p>
               <p>
-                <Link href="/en-us/writing" color>
+                <Link href="/writing" color>
                   I write about some of these topics here.
                 </Link>{' '}
               </p>
               <p>
                 In the past I've been an entrepreneur, salsa dancer and sailor. I helped
                 launch a{' '}
-                <Link href="#" target="_blank" color>
+                <Link href="https://badger.com" target="_blank" color>
                   DAO to bring Bitcoin to DeFi
                 </Link>
                 , a{' '}
-                <Link href="#" target="_blank" color>
+                <Link href="https://travala.com" target="_blank" color>
                   crypto travel booking platform{' '}
                 </Link>{' '}
                 and studied Mathematics and Economics at the University of British
@@ -54,7 +54,7 @@ const Application: NextPage<{}> = () => {
               </p>
               <p>
                 I enjoy contributing to OSS and building useful apps -{' '}
-                <Link href="/en-us/r&d" color>
+                <Link href="/r&d" color>
                   you can check them out here.
                 </Link>{' '}
               </p>

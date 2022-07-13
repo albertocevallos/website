@@ -1,5 +1,5 @@
 import { Layout } from 'lib/components'
-import { Image } from 'components'
+import { Image, Dot, Text } from 'components'
 
 export const meta = {
   title: 'eth-utils.com',
@@ -12,20 +12,28 @@ export const meta = {
   Jul 12, 2022
 </Text>
 
-[eth-utils.com](https://eth-utils.com) is a collection of common utilities for working with Ethereum codebases.
-I found myself googling online converters and hashing tools way too often so I decided to put these tools together in a single place.
+### In a tweet
 
-It currently supports:
+I built [eth-utils.com](https://eth-utils.com), a collection of common utilities for working with Ethereum codebases.
 
-✅ Unit conversion (eg. wei, gwei)
+### Challenge
 
-✅ Checksum
+I often find myself googling online converters for [big numbers](https://eth-converter.com/), [checksum](https://ethsum.netlify.app/), [keccak256](https://emn178.github.io/online-tools/keccak_256.html) and other data types. I expected it was something most smart contract and JavaScript developers do when testing simple assertions or feature functionality.
 
-✅ Hexstring conversion
+### Solution
 
-✅ Keccak-256
+I interviewed a handful of React and Typescript developers working on Web3, and found that the most used tools were:
 
-You can find the source code [here](https://github.com/albertocevallos/ethutils). Feel free to create an issue if you'd like to see any new feature.
+- Unit conversion (eg. wei, gwei)
+- Checksum
+- Hexstring conversion
+- Keccak-256
+
+### Results
+
+I used the [geist-ui](https://geist-ui.dev/en-us) design system and built out these simple utils, you can see a demo below. The source code is available on [GitHub](https://github.com/albertocevallos/ethutils), free to create an issue if you'd like to see any new feature.
+
+<br />
 
 <Image.Browser url="https://eth-utils.com" anchorProps={{ rel: 'nofollow' }}>
   <Image width="600px" height="660px" src="https://i.imgur.com/gfQXDKx.gif" />
